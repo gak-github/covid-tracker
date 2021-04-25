@@ -1,8 +1,5 @@
 
 # COVID-19 case tracker app on svelte
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
 This project was built on svelte. The data is being fetched from [covid-19 API](https://covid19api.com).
 It is built for learning (svelte) purpose and inspired by Brad Traversy's [sample project](https://www.youtube.com/watch?v=m-MAIpnH9ag) on Vue.js.
 
@@ -15,4 +12,4 @@ npm run dev
 http://localhost:5000
 
 ```
-This is also hosted on netlify (covid-tracker)[https://netlify.com]
+This is also hosted on netlify (covid-tracker)[https://aguruamy-covid-tracker.netlify.app]
