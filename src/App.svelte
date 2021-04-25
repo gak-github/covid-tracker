@@ -1,6 +1,8 @@
 <script>
 	import Main from './components/main.svelte';
 	import Header from './components/header.svelte';
+	import Footer from './components/footer.svelte';
+
 	let selectedCountry = '';
 	let loading = true;
     let title = 'Global';
@@ -57,13 +59,15 @@
 		}
 	}
 </style>
-
-<Header />
-<Main on:country={getDataForCountry} on:clearCountry={resetGlobal}
-	loading={loading}
-	title={title}
-	countries={countries}
-	stats={stats}
-	dataDate={dataDate}
-	selectedCountry={selectedCountry}
-/>
+<div class='container flex flex-col items-stretch w-4/12'>
+	<Header />
+	<Main on:country={getDataForCountry} on:clearCountry={resetGlobal}
+		loading={loading}
+		title={title}
+		countries={countries}
+		stats={stats}
+		dataDate={dataDate}
+		selectedCountry={selectedCountry}
+	/>
+	<Footer />
+</div>
