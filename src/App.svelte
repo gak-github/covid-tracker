@@ -1,30 +1,61 @@
 <script>
-	export let name;
+	import Main from './components/main.svelte';
+	import Header from './components/header.svelte';
+	let selectedCountry = '';
+	// this handles the forwarded event (on:country)
+	function getDataForCountry(event) {
+		selectedCountry = event.details.country;
+	}
+
+	let loading = true;
+    let title = 'Global';
+    let dataDate = '';
+    let stats = {};
+    let countries = [];
+	let data;
+
+	function updateProps(data) {
+		if (!data) {
+			return;
+		}
+		loading = false;
+		countries = data.Countries;
+		stats = data.Global;
+		dataDate = data.Date;
+	}
+	async function fetchCovidData() {
+		let res = await fetch('https://api.covid19api.com/summary');
+		if (res.ok) {
+			data = await res.json();
+			updateProps(data);
+			return data;
+		} else {
+			throw Error(res.json())
+		}
+    }
+	
+	fetchCovidData();
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<style global lang="postcss">
+	@tailwind base;
+	@tailwind components;
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
+	/* purgecss end ignore */
+  	@tailwind utilities;
+	@layer utilities {
+		.ml-55 {
+			margin-left: 55%;
 		}
 	}
 </style>
+
+<Header />
+<Main on:country={getDataForCountry} 
+		loading={loading}
+		title={title}
+		countries={countries}
+		stats={stats}
+		dataDate={dataDate}
+		selectedCountry={selectedCountry}
+/>
