@@ -1,7 +1,7 @@
 
 <script>
 </script>
-<header class="text-center bg-green-900 text-white p-4 mb-10 rounded-xl">
+<div class="text-center bg-green-900 text-white p-4 mb-10 rounded-xl">
     <div class="text-3xl md:text-4xl font-bold mb-3">
       <i class="fa fa-viruses"></i> Covid-19 Tracker
     </div>
@@ -12,4 +12,4 @@
         >covid19api.com</a
       >
     </p>
-</header>
+</div>

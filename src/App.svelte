@@ -59,7 +59,7 @@
 		}
 	}
 </style>
-<div class='container flex flex-col items-stretch w-4/12'>
+<div class='container flex flex-col items-center max-w-md md:w-full'>
 	<Header />
 	<Main on:country={getDataForCountry} on:clearCountry={resetGlobal}
 		loading={loading}
