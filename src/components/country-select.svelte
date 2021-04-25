@@ -13,7 +13,7 @@
   export let countries;
  </script>
  
-<select bind:value={selectedCountry} on:blur={ handleSelection }
+<select bind:value={selectedCountry} on:change={ handleSelection }
   class="form-select mt-10 block w-full border p-3 rounded">
   <option value="">Select Country</option>
   {#each countries as country}

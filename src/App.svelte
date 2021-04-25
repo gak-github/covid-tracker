@@ -2,18 +2,12 @@
 	import Main from './components/main.svelte';
 	import Header from './components/header.svelte';
 	let selectedCountry = '';
-	// this handles the forwarded event (on:country)
-	function getDataForCountry(event) {
-		selectedCountry = event.details.country;
-	}
-
 	let loading = true;
     let title = 'Global';
     let dataDate = '';
     let stats = {};
     let countries = [];
 	let data;
-
 	function updateProps(data) {
 		if (!data) {
 			return;
@@ -22,6 +16,8 @@
 		countries = data.Countries;
 		stats = data.Global;
 		dataDate = data.Date;
+		title = 'Global'; // by default, it is for global
+		selectedCountry = ''; // since it is global data
 	}
 	async function fetchCovidData() {
 		let res = await fetch('https://api.covid19api.com/summary');
@@ -33,6 +29,18 @@
 			throw Error(res.json())
 		}
     }
+
+	// this handles the forwarded event (on:country)
+	function getDataForCountry(event) {
+		selectedCountry = event.detail.country;
+		let countryObj = countries.find((obj) => obj.CountryCode === selectedCountry)
+		stats = countryObj;
+		title = countryObj.Country;
+	}
+
+	function resetGlobal(event) {
+		fetchCovidData(); // it will load the global status
+	}
 	
 	fetchCovidData();
 </script>
@@ -51,11 +59,11 @@
 </style>
 
 <Header />
-<Main on:country={getDataForCountry} 
-		loading={loading}
-		title={title}
-		countries={countries}
-		stats={stats}
-		dataDate={dataDate}
-		selectedCountry={selectedCountry}
+<Main on:country={getDataForCountry} on:clearCountry={resetGlobal}
+	loading={loading}
+	title={title}
+	countries={countries}
+	stats={stats}
+	dataDate={dataDate}
+	selectedCountry={selectedCountry}
 />
