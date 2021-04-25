@@ -12,4 +12,4 @@ npm run dev
 http://localhost:5000
 
 ```
-This is also hosted on netlify (covid-tracker)[https://aguruamy-covid-tracker.netlify.app]
+This is also hosted on netlify (covid-tracker)[https://aguruamy-covid-tracker.netlify.app/]
